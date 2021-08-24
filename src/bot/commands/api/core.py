@@ -1,5 +1,5 @@
 import requests
-from config import BASE_URL, DOWNLOAD_URL
+from commands.api.config import *
 
 # DOWNLOAD_URI EXAMPLE
 # https://dwnlg.link/book-n/giulio-cavalli/nuovissimo-testamento-giulio-cavalli/nuovissimo-testamento.epub
@@ -47,3 +47,7 @@ def __download_book(book_uri=None, book_format=None):
 def download(book_id):
     download_uri, book_format = __get_book_download_uri(book_id)
     __download_book(download_uri, book_format)
+
+def get_book_media_from_id(media_id, args={}):
+    res = __request(f"/media/{media_id}", params={**args})
+    return res["link"]
