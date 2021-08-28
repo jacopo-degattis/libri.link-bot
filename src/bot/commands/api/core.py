@@ -16,7 +16,7 @@ def __get_download_info(book_slug):
             payload = {"book_slug": book_slug, "book_format": format}
     return payload
 
-def __get_book_download_uri(book_id=None):
+def get_book_download_uri(book_id=None):
     if book_id:
         book_info = get_book_info(book_id)
         author_info = get_author_info(book_info["autore"][0])
@@ -40,12 +40,12 @@ def search(query, args={}):
 def __download_book(book_uri=None, book_format=None):
     if book_uri and book_format:
         res = requests.get(book_uri)
-        if res.status_code == 200:
+        if res.status_code ==    200:
             with open(f"output.{book_format}", "wb") as output_file:
                 output_file.write(res.content)
 
 def download(book_id):
-    download_uri, book_format = __get_book_download_uri(book_id)
+    download_uri, book_format = get_book_download_uri(book_id)
     __download_book(download_uri, book_format)
 
 def get_book_media_from_id(media_id, args={}):
