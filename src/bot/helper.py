@@ -37,7 +37,6 @@ def get_complete_book_data(book_data):
   # TODO: improve function, better algorithm
   book_data["year"] = taxonomies_info["anno"][0]["name"] if len(taxonomies_info["anno"]) > 0 else "Unknown"
   book_data["author"] = " ".join(taxonomies_info["autore"][0]["name"].split("-")).title() if len(taxonomies_info["autore"]) > 0 else "Unknown"
-  print(taxonomies_info["genere"])
   book_data["genre"] = taxonomies_info["genere"][0]["name"] if len(taxonomies_info["genere"]) > 0 else None
   book_data["publisher"] = " ".join(taxonomies_info["editore"][0]["name"].split("-")).title() if len(taxonomies_info["editore"]) > 0 else "Unknown"
   book_data["cover"] = get_book_media_from_id(book_data["featured_media"])
@@ -49,7 +48,7 @@ def get_buffer_book_download(book_id):
   document = get_raw_data_from_url(uri)
   return document
 
-def get_inline_keboard_books(books, offset=5):
+def get_inline_keboard_books(books, offset=0):
   # 5 books per page
   keyboard = list()
   for book in books[offset:offset+5]:
